@@ -1,0 +1,57 @@
+package julian.TurnosBarber.entity;
+
+import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.ToString;
+import org.springframework.stereotype.Service;
+
+import java.math.BigDecimal;
+import java.time.LocalDateTime;
+
+@Entity
+@Table(name = "appintments")
+@Data
+@ToString
+@NoArgsConstructor
+@AllArgsConstructor
+public class Appointment {
+    @Id
+    @GeneratedValue(strategy = GenerationType.UUID)
+    private String id;
+
+    @ManyToOne
+    @JoinColumn(name = "client_id", nullable = false)
+    private User client;
+
+    @ManyToOne
+    @JoinColumn(name = "barber_id", nullable = false)
+    private Barber barber;
+
+    //@ManyToOne
+    //@JoinColumn(name = "service_id", nullable = false)
+    //private Service service;
+
+    @Column(nullable = false)
+    private LocalDateTime dateTime;
+
+    private Integer duration;
+
+    @Enumerated(EnumType.STRING)
+    private AppointmentStatus status = AppointmentStatus.PENDING;
+
+    private BigDecimal totalAmount;
+    private BigDecimal depositAmount;
+    private String calendlyUrl;
+    private String mpId;
+
+    //@OneToOne(mappedBy = "appointment", cascade = CascadeType.ALL)
+    //private Payment payment;
+
+
+}
+
+enum AppointmentStatus{
+    PENDING, CONFIRMED, CANCELLED, COMPLETED
+}
