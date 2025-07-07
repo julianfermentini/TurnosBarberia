@@ -29,7 +29,7 @@ public class BarberShop {
     @OneToMany(mappedBy = "barberShop", cascade = CascadeType.ALL)
     private List<Barber> barbers = new ArrayList<>();
 
-    //@OneToMany(mappedBy = "barberShop", cascade = CascadeType.ALL)
-    //private List<Service> services = new ArrayList<>();
+    @OneToMany(mappedBy = "barberShop", cascade = CascadeType.ALL)
+    private List<BarberService> services = new ArrayList<>();
 
 }

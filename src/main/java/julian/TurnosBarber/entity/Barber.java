@@ -21,11 +21,11 @@ public class Barber {
     @GeneratedValue(strategy = GenerationType.UUID)
     private String id;
 
-    @OneToOne
+    @OneToOne //conexion con user
     @JoinColumn(name = "userId", nullable = false)
     private User user;
 
-    @ManyToOne
+    @ManyToOne //conexion con barber shop
     @JoinColumn(name = "barbershop_id", nullable = false)
     private BarberShop barberShop;
 
@@ -34,6 +34,7 @@ public class Barber {
     private boolean isActive;
     private BigDecimal comission;
 
-    //private List<Appointments> appointments = new ArrayList<>();
+    @OneToMany(mappedBy = "barber", cascade = CascadeType.ALL)
+    private List<Appointment> appointments = new ArrayList<>();
 
 }

@@ -5,13 +5,11 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
-import org.springframework.stereotype.Service;
-
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 @Entity
-@Table(name = "appintments")
+@Table(name = "appointments")
 @Data
 @ToString
 @NoArgsConstructor
@@ -21,17 +19,17 @@ public class Appointment {
     @GeneratedValue(strategy = GenerationType.UUID)
     private String id;
 
-    @ManyToOne
+    @ManyToOne //conexion con user
     @JoinColumn(name = "client_id", nullable = false)
     private User client;
 
-    @ManyToOne
+    @ManyToOne //conexion con barber
     @JoinColumn(name = "barber_id", nullable = false)
     private Barber barber;
 
-    //@ManyToOne
-    //@JoinColumn(name = "service_id", nullable = false)
-    //private Service service;
+    @ManyToOne //conexion con service
+    @JoinColumn(name = "service_id", nullable = false)
+    private BarberService service;
 
     @Column(nullable = false)
     private LocalDateTime dateTime;
@@ -46,8 +44,8 @@ public class Appointment {
     private String calendlyUrl;
     private String mpId;
 
-    //@OneToOne(mappedBy = "appointment", cascade = CascadeType.ALL)
-    //private Payment payment;
+    @OneToOne(mappedBy = "appointment", cascade = CascadeType.ALL)
+    private Payment payment;
 
 
 }

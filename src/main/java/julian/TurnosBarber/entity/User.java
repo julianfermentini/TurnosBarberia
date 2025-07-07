@@ -6,6 +6,9 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Entity
 @Table(name="users")
 @Data
@@ -36,6 +39,9 @@ public class User {
 
     @Enumerated(EnumType.STRING)
     private Role role = Role.CLIENT;
+
+    @OneToMany(mappedBy = "client", cascade = CascadeType.ALL)
+    private List<Appointment> appointments = new ArrayList<>();
 
 }
 
