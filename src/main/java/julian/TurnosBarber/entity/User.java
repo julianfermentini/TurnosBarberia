@@ -16,6 +16,7 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 
+@Inheritance(strategy = InheritanceType.JOINED)
 public class User {
 
    @Id
@@ -35,13 +36,15 @@ public class User {
     private String email;
 
     @Column(nullable = false)
-    private String contraseña;
+    private String password;
 
     @Enumerated(EnumType.STRING)
     private Role role = Role.CLIENT;
 
     @OneToMany(mappedBy = "client", cascade = CascadeType.ALL)
     private List<Appointment> appointments = new ArrayList<>();
+
+    private boolean isActive;
 
 }
 

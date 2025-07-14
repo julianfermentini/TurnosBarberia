@@ -16,14 +16,11 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 
-public class Barber {
+public class Barber extends User{
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     private String id;
 
-    @OneToOne //conexion con user
-    @JoinColumn(name = "userId", nullable = false)
-    private User user;
 
     @ManyToOne //conexion con barber shop
     @JoinColumn(name = "barbershop_id", nullable = false)
