@@ -30,6 +30,6 @@ public class BarberShop {
     private List<Barber> barbers = new ArrayList<>();
 
     @OneToMany(mappedBy = "barberShop", cascade = CascadeType.ALL)
-    private List<BarberService> services = new ArrayList<>();
+    private List<BarberJobs> services = new ArrayList<>();
 
 }

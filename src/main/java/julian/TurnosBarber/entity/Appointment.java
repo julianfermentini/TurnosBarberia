@@ -28,8 +28,8 @@ public class Appointment {
     private Barber barber;
 
     @ManyToOne //conexion con service
-    @JoinColumn(name = "service_id", nullable = false)
-    private BarberService service;
+    @JoinColumn(name = "jobs_id", nullable = false)
+    private BarberJobs jobs;
 
     @Column(nullable = false)
     private LocalDateTime dateTime;

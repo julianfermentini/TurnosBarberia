@@ -7,9 +7,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@Table(name = "barber_service")
+@Table(name = "barber_jobs")
 
-public class BarberService {
+public class BarberJobs {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     private String id;
@@ -23,7 +23,7 @@ public class BarberService {
     @JoinColumn(name = "barberShopId" ,nullable = false)
     private BarberShop barberShop;
 
-    @OneToMany(mappedBy = "service", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "jobs", cascade = CascadeType.ALL)
     private List<Appointment> appointments = new ArrayList<>();
 
     private boolean isActive = true;
