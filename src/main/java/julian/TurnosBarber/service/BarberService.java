@@ -1,6 +1,7 @@
 package julian.TurnosBarber.service;
 
 import jakarta.persistence.EntityNotFoundException;
+import jakarta.transaction.Transactional;
 import julian.TurnosBarber.entity.Appointment;
 import julian.TurnosBarber.entity.Barber;
 import julian.TurnosBarber.entity.User;
@@ -28,11 +29,11 @@ public class BarberService {
         Barber barber = barberRepository.findById(id).orElse(null);
         return barber;
     }
-
+    @Transactional
     public void saveBarber(Barber barber){
         barberRepository.save(barber);
     }
-
+    @Transactional
     public void deleteBarber(Barber barber){
         barberRepository.delete(barber);
     }
@@ -41,6 +42,7 @@ public class BarberService {
         return barberRepository.findByIsActiveTrue();
     }
 
+    @Transactional
     public User updateUser(String id, Barber updatedBarberData) {
         return barberRepository.findById(id)// Busca al barbero por ID, devuelve Optional<Barber>
                 .map(barber -> {// Si lo encuentra, ejecuta esta función
@@ -56,8 +58,8 @@ public class BarberService {
                 .orElseThrow(() -> new EntityNotFoundException("Usuario no encontrado con id " + id));
     }
 
-    public List<Appointment> getBarberAppointments(String id) {
-        Barber barber = barberRepository.findById(id).orElseThrow(() -> new EntityNotFoundException("Usuario no encontrado con id " + id));
+    public List<Appointment> getBarberAppointments(String barberId) {
+        Barber barber = barberRepository.findById(barberId).orElseThrow(() -> new EntityNotFoundException("Usuario no encontrado con id " + barberId));
 
         return appointmentRepository.findByBarberId(barber.getId());
     }

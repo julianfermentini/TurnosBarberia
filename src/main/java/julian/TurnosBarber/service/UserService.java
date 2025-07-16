@@ -1,6 +1,7 @@
 package julian.TurnosBarber.service;
 
 import jakarta.persistence.EntityNotFoundException;
+import jakarta.transaction.Transactional;
 import julian.TurnosBarber.entity.User;
 import julian.TurnosBarber.repository.IUserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,11 +25,11 @@ public class UserService {
         User user = userRepository.findById(id).orElse(null);
         return user;
     }
-
+    @Transactional
     public void saveUser(User user){
         userRepository.save(user);
     }
-
+    @Transactional
     public void deleteUser(User user){
         userRepository.delete(user);
     }
@@ -37,7 +38,7 @@ public class UserService {
         return userRepository.findByActiveTrue();
     }
 
-
+    @Transactional
     public User updateUser(String id, User updatedUserData) {
         return userRepository.findById(id).map(user -> {
                     user.setName(updatedUserData.getName());

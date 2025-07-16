@@ -1,5 +1,6 @@
 package julian.TurnosBarber.repository;
 
+import julian.TurnosBarber.entity.Appointment;
 import julian.TurnosBarber.entity.Barber;
 import julian.TurnosBarber.entity.BarberShop;
 import org.springframework.data.jpa.repository.JpaRepository;

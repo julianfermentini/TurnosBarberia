@@ -50,6 +50,3 @@ public class Appointment {
 
 }
 
-enum AppointmentStatus{
-    PENDING, CONFIRMED, CANCELLED, COMPLETED
-}
