@@ -6,6 +6,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 @Entity
 @Table(name = "payment")@ToString
@@ -23,16 +24,15 @@ public class Payment {
     private Appointment appointment;
 
     private String mercadoPagoId;
-    private Integer amount;
+    private BigDecimal amount;
 
     @Enumerated(EnumType.STRING)
-    private Status status = Status.PENDING;
+    private PaymentStatus status = PaymentStatus.PENDING;
 
-    private String paymentMethod;
+    @Enumerated(EnumType.STRING)
+    private PaymentMethod paymentMethod;
+
     private LocalDateTime date;
 
 
 }
-enum Status {
-    PENDING, APPROBED, REJECTED, CANCELLED
-        }

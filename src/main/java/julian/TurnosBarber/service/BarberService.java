@@ -4,7 +4,6 @@ import jakarta.persistence.EntityNotFoundException;
 import jakarta.transaction.Transactional;
 import julian.TurnosBarber.entity.Appointment;
 import julian.TurnosBarber.entity.Barber;
-import julian.TurnosBarber.entity.User;
 import julian.TurnosBarber.repository.IAppointmentRepository;
 import julian.TurnosBarber.repository.IBarberRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,7 +42,7 @@ public class BarberService {
     }
 
     @Transactional
-    public User updateUser(String id, Barber updatedBarberData) {
+    public Barber updateBarber(String id, Barber updatedBarberData) {
         return barberRepository.findById(id)// Busca al barbero por ID, devuelve Optional<Barber>
                 .map(barber -> {// Si lo encuentra, ejecuta esta función
                     // Se actualizan los datos del barbero
