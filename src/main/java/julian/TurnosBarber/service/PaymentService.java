@@ -77,7 +77,7 @@ public class PaymentService {
         return paymentRepository.findByStatus(status, id);
     }
 
-    public Payment processPayment(String appointmentId, PaymentMethod method, BigDecimal amount){
+    public Payment processPayment(String appointmentId, PaymentMethod method, double amount){
         Appointment appointment = appointmentRepository.findById(appointmentId).orElseThrow(()->new RuntimeException("Reserva no encontrada"));
 
         Payment payment = new Payment();
@@ -88,5 +88,33 @@ public class PaymentService {
         payment.setDate(LocalDateTime.now());
 
         return paymentRepository.save(payment);
+    }
+
+    public Double getTotalEarningsByBarber(String barberId){
+        List <Appointment> appointments = appointmentRepository.findByBarberId(barberId);
+
+        double totalAmout = 0.0;
+
+        for(Appointment appointment : appointments){
+            List<Payment> payments = paymentRepository.findByAppointmentId(appointment.getId());
+            for(Payment payment: payments){
+                totalAmout += payment.getAmount();
+            }
+        }
+        return totalAmout;
+    }
+
+    public Double getTotalEarningsByShop(String shopId){
+        List <Appointment> appointments = appointmentRepository.findByShopId(shopId);
+
+        double totalAmout = 0.0;
+
+        for(Appointment appointment : appointments){
+            List<Payment> payments = paymentRepository.findByAppointmentId(appointment.getId());
+            for(Payment payment: payments){
+                totalAmout += payment.getAmount();
+            }
+        }
+        return totalAmout;
     }
 }

@@ -16,22 +16,22 @@ public class UserService {
     @Autowired
     private IUserRepository userRepository;
 
-    private List<User> getClients(){
-        List<User> clientes = userRepository.findAll();
-        return clientes;
+    public List<User> getUsers(){
+        List<User> users = userRepository.findAll();
+        return users;
     }
 
-    private User findUserById(String id){
+    public User getUserById(String id){
         User user = userRepository.findById(id).orElse(null);
         return user;
     }
     @Transactional
-    public void saveUser(User user){
-        userRepository.save(user);
+    public User saveUser(User user){
+       return  userRepository.save(user);
     }
     @Transactional
-    public void deleteUser(User user){
-        userRepository.delete(user);
+    public void deleteUser(String id){
+        userRepository.deleteById(id);
     }
 
     public List<User> getActiveUsers(){

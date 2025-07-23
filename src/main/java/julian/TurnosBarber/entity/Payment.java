@@ -24,7 +24,7 @@ public class Payment {
     private Appointment appointment;
 
     private String mercadoPagoId;
-    private BigDecimal amount;
+    private double amount;
 
     @Enumerated(EnumType.STRING)
     private PaymentStatus status = PaymentStatus.PENDING;
