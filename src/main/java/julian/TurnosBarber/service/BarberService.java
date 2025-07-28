@@ -19,22 +19,22 @@ public class BarberService {
     @Autowired
     private IAppointmentRepository appointmentRepository;
 
-    private List<Barber> getBarbers(){
+    public List<Barber> getBarbers(){
         List<Barber> barbers = barberRepository.findAll();
         return barbers;
     }
 
-    private Barber findBarberById(String id){
+    public Barber getBarberById(String id){
         Barber barber = barberRepository.findById(id).orElse(null);
         return barber;
     }
     @Transactional
-    public void saveBarber(Barber barber){
-        barberRepository.save(barber);
+    public Barber saveBarber(Barber barber){
+        return barberRepository.save(barber);
     }
     @Transactional
-    public void deleteBarber(Barber barber){
-        barberRepository.delete(barber);
+    public void deleteBarber(String id){
+        barberRepository.deleteById(id);
     }
 
     public List<Barber> getActiveBarbers(){
