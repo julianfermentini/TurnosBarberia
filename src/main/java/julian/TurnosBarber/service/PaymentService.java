@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -29,22 +30,22 @@ public class PaymentService {
     @Autowired
     private PaymentStatus status;
 
-    private List<Payment> getPayment(){
+    public List<Payment> getPayment(){
         List<Payment> Payments = paymentRepository.findAll();
         return Payments;
     }
 
-    private Payment findPaymentById(String id){
+    public Payment findPaymentById(String id){
         Payment payment =paymentRepository.findById(id).orElse(null);
         return payment;
     }
     @Transactional
-    public void savePayment(Payment payment){
-        paymentRepository.save(payment);
+    public Payment savePayment(Payment payment){
+       return paymentRepository.save(payment);
     }
     @Transactional
-    public void deletePayment(Payment payment){
-        paymentRepository.delete(payment);
+    public void deletePayment(String id){
+        paymentRepository.deleteById(id);
     }
 
     @Transactional
@@ -63,17 +64,17 @@ public class PaymentService {
                 .orElseThrow(() -> new EntityNotFoundException("Pago no encontrado con id " + id));
     }
 
-    public List<Payment> findPaymentsByUser(String id){ //Devuelve los pagos por usuario
+    public List<Payment> getPaymentsByUser(String id){ //Devuelve los pagos por usuario
         User user = userRepository.findById(id).orElseThrow(() -> new RuntimeException("Usuario no encontrado"));
         return paymentRepository.findByClientId(user.getId());
     }
 
-    public List<Payment> findPaymentsByAppointment(String id){ //Devuelve los pagos por reserva
+    public List<Payment> getPaymentsByAppointment(String id){ //Devuelve los pagos por reserva
         Appointment appointment = appointmentRepository.findById(id).orElseThrow(() -> new RuntimeException("Reserva no encontrada"));
         return paymentRepository.findByAppointmentId(appointment.getId());
     }
 
-    public List<Payment> findPaymentsByStatus(PaymentStatus status, String id){ //Devuelve los pagos por status
+    public List<Payment> getPaymentsByStatus(PaymentStatus status, String id){ //Devuelve los pagos por status
         return paymentRepository.findByStatus(status, id);
     }
 
@@ -117,4 +118,6 @@ public class PaymentService {
         }
         return totalAmout;
     }
+
+
 }

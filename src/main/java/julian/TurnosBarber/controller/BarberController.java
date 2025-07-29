@@ -47,7 +47,7 @@ public class BarberController {
     }
 
     @PutMapping("/{id}") //PUT actualizar barbero
-    public ResponseEntity<Barber> updateUser(@PathVariable String id, @RequestBody Barber barber){
+    public ResponseEntity<Barber> updateBarber(@PathVariable String id, @RequestBody Barber barber){
         Barber updatedBarber  = barberService.updateBarber(id, barber);
         if(updatedBarber!= null){
             return ResponseEntity.ok(updatedBarber);

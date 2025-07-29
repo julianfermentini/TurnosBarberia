@@ -1,5 +1,6 @@
 package julian.TurnosBarber.service;
 
+import jakarta.persistence.EntityNotFoundException;
 import jakarta.transaction.Transactional;
 import julian.TurnosBarber.entity.Appointment;
 import julian.TurnosBarber.entity.Barber;
@@ -20,23 +21,39 @@ public class BarberShopService {
     private IAppointmentRepository appointmentRepository;
 
 
-    private List<BarberShop> getBarberShops(){
+    public List<BarberShop> getBarberShops(){
         List<BarberShop> barberShops = barberShopRepository.findAll();
         return barberShops;
     }
 
-    private BarberShop findBarberShopById(String id){
+    public BarberShop findBarberShopById(String id){
         BarberShop barberShop = barberShopRepository.findById(id).orElse(null);
         return barberShop;
     }
 
     @Transactional
-    public void saveBarberShop(BarberShop barberShop){
-        barberShopRepository.save(barberShop);
+    public BarberShop saveBarberShop(BarberShop barberShop){
+        return barberShopRepository.save(barberShop);
+    }
+
+    @Transactional
+    public BarberShop updateBarberShop(String id, BarberShop updatedShopData) {
+        return barberShopRepository.findById(id)// Busca la barberia por ID, devuelve Optional<BarberShop>
+                .map(barberShop -> {// Si lo encuentra, ejecuta esta función
+                    // Se actualizan los datos del barbero
+                    barberShop.setName(updatedShopData.getName());
+                    barberShop.setAdress(updatedShopData.getAdress());
+                    barberShop.setPhone(updatedShopData.getPhone());
+                    barberShop.setBarbers(updatedShopData.getBarbers());
+                    barberShop.setServices(updatedShopData.getServices());
+                    // Se guarda el barbero actualizado en la base de datos
+                    return barberShopRepository.save(barberShop);
+                })//si el id no existe ejecuta este mensaje de error
+                .orElseThrow(() -> new EntityNotFoundException("Barberia no encontrada con id " + id));
     }
     @Transactional
-    public void deleteBarberShop(BarberShop barberShop){
-        barberShopRepository.delete(barberShop);
+    public void deleteBarberShop(String id){
+        barberShopRepository.deleteById(id);
     }
 
     public List<BarberShop> getActiveBarberShop(){ //Devuelve la lista de barberos activos de la barberia

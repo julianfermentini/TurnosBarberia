@@ -19,24 +19,24 @@ public class AppointmentService {
     @Autowired
     private IUserRepository userRepository;
 
-    private List<Appointment> getAppointments(){
+    public List<Appointment> getAppointments(){
         List<Appointment> appointments = appointmentRepository.findAll();
         return appointments;
     }
 
-    private Appointment findAppointmentById(String id){
+    public Appointment getAppointmentById(String id){
         Appointment appointment = appointmentRepository.findById(id).orElse(null);
         return appointment;
     }
 
     @Transactional
-    public void saveAppointment(Appointment appointment){
-        appointmentRepository.save(appointment);
+    public Appointment saveAppointment(Appointment appointment){
+       return  appointmentRepository.save(appointment);
     }
 
     @Transactional
-    public void deleteAppointment(Appointment appointment){
-        appointmentRepository.delete(appointment);
+    public void deleteAppointment(String id){
+        appointmentRepository.deleteById(id);
     }
 
     @Transactional
@@ -57,20 +57,20 @@ public class AppointmentService {
                 .orElseThrow(() -> new EntityNotFoundException("Reserva no encontrada con id " + id));
     }
 
-    public List<Appointment> findAppointmentsByUser(String id){ //Devuelve las reservas de cada usuario
+    public List<Appointment> getAppointmentsByUser(String id){ //Devuelve las reservas de cada usuario
         User user = userRepository.findById(id).orElseThrow(() -> new RuntimeException("BarberShop no encontrada"));
         return appointmentRepository.findByClientId(user.getId());
     }
 
-    public List<Appointment> findAppointmentsByBarber(String barberId) { //Devuelve las reservas de cada barbero
+    public List<Appointment> getAppointmentsByBarber(String barberId) { //Devuelve las reservas de cada barbero
         return appointmentRepository.findByBarberId(barberId);
     }
 
-    public List<Appointment> findAppointmentsByDate(LocalDateTime date){ //Devuelve las reservas por fecha
+    public List<Appointment> getAppointmentsByDate(LocalDateTime date){ //Devuelve las reservas por fecha
         return appointmentRepository.findByDate(date);
     }
 
-    public List<Appointment> findAppointmentsByStatus(String status){ //Devuelve las reservas por status
+    public List<Appointment> getAppointmentsByStatus(String status){ //Devuelve las reservas por status
         return appointmentRepository.findByStatus(status);
     }
 
