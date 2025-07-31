@@ -13,7 +13,7 @@ public interface IAppointmentRepository extends JpaRepository<Appointment, Strin
 
     List<Appointment> findByClientId(String clientId);
 
-    List<Appointment> findByDate(LocalDateTime date);
+    List<Appointment> findByDateTime(LocalDateTime date);
 
     List<Appointment> findByStatus(String status);
 

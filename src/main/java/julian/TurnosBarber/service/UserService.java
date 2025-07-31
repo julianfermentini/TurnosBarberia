@@ -35,7 +35,7 @@ public class UserService {
     }
 
     public List<User> getActiveUsers(){
-        return userRepository.findByActiveTrue();
+        return userRepository.findByIsActiveTrue();
     }
 
     @Transactional

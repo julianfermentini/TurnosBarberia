@@ -76,8 +76,8 @@ public class PaymentController {
 
     // GET /api/payments/status/{status} - Obtener pagos por estado
     @GetMapping("/status/{status}")
-    public ResponseEntity<List<Payment>> getPaymentsByStatus(@PathVariable PaymentStatus status, @PathVariable String id) {
-        List<Payment> payments = paymentService.getPaymentsByStatus(status, id);
+    public ResponseEntity<List<Payment>> getPaymentsByStatus(@PathVariable PaymentStatus status) {
+        List<Payment> payments = paymentService.getPaymentsByStatus(status);
         return ResponseEntity.ok(payments);
     }
 

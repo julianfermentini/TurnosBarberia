@@ -27,8 +27,7 @@ public class PaymentService {
     @Autowired
     private IAppointmentRepository appointmentRepository;
 
-    @Autowired
-    private PaymentStatus status;
+
 
     public List<Payment> getPayment(){
         List<Payment> Payments = paymentRepository.findAll();
@@ -66,16 +65,16 @@ public class PaymentService {
 
     public List<Payment> getPaymentsByUser(String id){ //Devuelve los pagos por usuario
         User user = userRepository.findById(id).orElseThrow(() -> new RuntimeException("Usuario no encontrado"));
-        return paymentRepository.findByClientId(user.getId());
+        return paymentRepository.findByAppointment_Client_Id(user.getId());
     }
 
     public List<Payment> getPaymentsByAppointment(String id){ //Devuelve los pagos por reserva
         Appointment appointment = appointmentRepository.findById(id).orElseThrow(() -> new RuntimeException("Reserva no encontrada"));
-        return paymentRepository.findByAppointmentId(appointment.getId());
+        return paymentRepository.findByAppointment_Id(appointment.getId());
     }
 
-    public List<Payment> getPaymentsByStatus(PaymentStatus status, String id){ //Devuelve los pagos por status
-        return paymentRepository.findByStatus(status, id);
+    public List<Payment> getPaymentsByStatus(PaymentStatus status){ //Devuelve los pagos por status
+        return paymentRepository.findByStatus(status);
     }
 
     public Payment processPayment(String appointmentId, PaymentMethod method, double amount){
@@ -97,7 +96,7 @@ public class PaymentService {
         double totalAmout = 0.0;
 
         for(Appointment appointment : appointments){
-            List<Payment> payments = paymentRepository.findByAppointmentId(appointment.getId());
+            List<Payment> payments = paymentRepository.findByAppointment_Id(appointment.getId());
             for(Payment payment: payments){
                 totalAmout += payment.getAmount();
             }
@@ -111,7 +110,7 @@ public class PaymentService {
         double totalAmout = 0.0;
 
         for(Appointment appointment : appointments){
-            List<Payment> payments = paymentRepository.findByAppointmentId(appointment.getId());
+            List<Payment> payments = paymentRepository.findByAppointment_Id(appointment.getId());
             for(Payment payment: payments){
                 totalAmout += payment.getAmount();
             }

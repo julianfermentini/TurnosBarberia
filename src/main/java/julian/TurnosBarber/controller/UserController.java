@@ -18,7 +18,7 @@ public class UserController {
     @Autowired
     private UserService userService;
 
-    @GetMapping //GET Obtener todos los usuarios
+    @GetMapping("/all") //GET Obtener todos los usuarios
     public ResponseEntity<List<User>> getAllUsers(){
         List<User> users = userService.getUsers();
         return ResponseEntity.ok(users);
@@ -71,7 +71,7 @@ public class UserController {
 
 
 
-    @GetMapping //GET buscar por usuarios activos
+    @GetMapping("/byActive") //GET buscar por usuarios activos
     public ResponseEntity<List<User>> getActiveUsers(){
         List<User> activeUsers = userService.getActiveUsers();
 

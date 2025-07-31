@@ -17,7 +17,7 @@ public class AppointmentController {
     @Autowired
     private AppointmentService appointmentService;
 
-    @GetMapping //GET Obtener todos las reservas
+    @GetMapping("/all") //GET Obtener todos las reservas
     public ResponseEntity<List<Appointment>> getAllAppointments(){
         List<Appointment> appointments = appointmentService.getAppointments();
         return ResponseEntity.ok(appointments);
@@ -29,25 +29,25 @@ public class AppointmentController {
         return ResponseEntity.ok(appointment);
     }
 
-    @GetMapping //GET Obtener  reservas por usuario
+    @GetMapping("/user/{userId}") //GET Obtener  reservas por usuario
     public ResponseEntity<List<Appointment>> getAppointmentsByUser(@PathVariable String id){
         List<Appointment> appointments = appointmentService.getAppointmentsByUser(id);
         return ResponseEntity.ok(appointments);
     }
 
-    @GetMapping //GET Obtener  reservas por barbero
+    @GetMapping("/byDate") //GET Obtener  reservas por barbero
     public ResponseEntity<List<Appointment>> getAppointmentsByBarber(@PathVariable String id){
         List<Appointment> appointments = appointmentService.getAppointmentsByBarber(id);
         return ResponseEntity.ok(appointments);
     }
 
-    @GetMapping //GET Obtener  reservas por fecha
+    @GetMapping("/barber/{barberId}") //GET Obtener  reservas por fecha
     public ResponseEntity<List<Appointment>> getAppointmentsByDate(@PathVariable LocalDateTime date){
         List<Appointment> appointments = appointmentService.getAppointmentsByDate(date);
         return ResponseEntity.ok(appointments);
     }
 
-    @GetMapping //GET Obtener  reservas por usuario
+    @GetMapping("/byStatus") //GET Obtener  reservas por usuario
     public ResponseEntity<List<Appointment>> getAppointmentsByStatus(@PathVariable String status){
         List<Appointment> appointments = appointmentService.getAppointmentsByStatus(status);
         return ResponseEntity.ok(appointments);

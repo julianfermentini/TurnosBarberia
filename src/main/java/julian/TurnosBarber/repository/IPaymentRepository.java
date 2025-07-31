@@ -9,9 +9,9 @@ import java.util.List;
 
 public interface IPaymentRepository extends JpaRepository<Payment, String> {
 
-    List<Payment> findByClientId(String id);
+    List<Payment> findByAppointment_Client_Id(String clientId);
 
-    List<Payment> findByAppointmentId(String id);
+    List<Payment> findByAppointment_Id(String id);
 
-    List<Payment> findByStatus(PaymentStatus status,String id);
+    List<Payment> findByStatus(PaymentStatus status);
 }

@@ -16,13 +16,13 @@ public class BarberController {
     @Autowired
     private BarberService barberService;
 
-    @GetMapping //GET Obtener todos los barberos
+    @GetMapping("/allBarbers") //GET Obtener todos los barberos
     public ResponseEntity<List<Barber>> getAllBarbers(){
         List<Barber> barbers = barberService.getBarbers();
         return ResponseEntity.ok(barbers);
     }
 
-    @GetMapping("/{id}") //GET Obtener barbero por id
+    @GetMapping("/barberId/{id}") //GET Obtener barbero por id
     public ResponseEntity<Barber> getBarberById(@PathVariable String id){
         Barber barber  = barberService.getBarberById(id);
         if(barber!= null){
@@ -67,7 +67,7 @@ public class BarberController {
 
     }
 
-    @GetMapping //GET buscar por barberos activos
+    @GetMapping("/byActive") //GET buscar por barberos activos
     public ResponseEntity<List<Barber>> getActiveBarbers(){
         List<Barber> activeBarbers = barberService.getActiveBarbers();
 

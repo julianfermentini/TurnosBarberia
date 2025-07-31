@@ -32,4 +32,59 @@ public class BarberShop {
     @OneToMany(mappedBy = "barberShop", cascade = CascadeType.ALL)
     private List<BarberJobs> services = new ArrayList<>();
 
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getAdress() {
+        return adress;
+    }
+
+    public void setAdress(String adress) {
+        this.adress = adress;
+    }
+
+    public Integer getPhone() {
+        return phone;
+    }
+
+    public void setPhone(Integer phone) {
+        this.phone = phone;
+    }
+
+    public boolean isActive() {
+        return isActive;
+    }
+
+    public void setActive(boolean active) {
+        isActive = active;
+    }
+
+    public List<Barber> getBarbers() {
+        return barbers;
+    }
+
+    public void setBarbers(List<Barber> barbers) {
+        this.barbers = barbers;
+    }
+
+    public List<BarberJobs> getServices() {
+        return services;
+    }
+
+    public void setServices(List<BarberJobs> services) {
+        this.services = services;
+    }
 }

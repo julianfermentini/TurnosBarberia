@@ -67,7 +67,7 @@ public class AppointmentService {
     }
 
     public List<Appointment> getAppointmentsByDate(LocalDateTime date){ //Devuelve las reservas por fecha
-        return appointmentRepository.findByDate(date);
+        return appointmentRepository.findByDateTime(date);
     }
 
     public List<Appointment> getAppointmentsByStatus(String status){ //Devuelve las reservas por status

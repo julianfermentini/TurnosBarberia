@@ -59,9 +59,9 @@ public class BarberShopService {
     public List<BarberShop> getActiveBarberShop(){ //Devuelve la lista de barberos activos de la barberia
         return barberShopRepository.findByIsActiveTrue();
     }
-
+/*
     public List<Appointment> findByShopId(String id){ //Devuelve las reservas de a barberia
         BarberShop barberShop = barberShopRepository.findById(id).orElseThrow(() -> new RuntimeException("BarberShop no encontrada"));
         return appointmentRepository.findByShopId(barberShop.getId());
-    }
+    }*/
 }

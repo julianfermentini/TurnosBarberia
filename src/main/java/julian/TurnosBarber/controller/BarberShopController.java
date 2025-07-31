@@ -16,7 +16,7 @@ public class BarberShopController {
     @Autowired
     private BarberShopService shopService;
 
-    @GetMapping //GET Obtener todos las barberias
+    @GetMapping("/all") //GET Obtener todos las barberias
     public ResponseEntity<List<BarberShop>> getAllBarberShop(){
         List<BarberShop> barberShop = shopService.getBarberShops();
         return ResponseEntity.ok(barberShop);
@@ -28,7 +28,7 @@ public class BarberShopController {
         return ResponseEntity.ok(barberShop);
     }
 
-    @GetMapping //GET buscar por barberias activas
+    @GetMapping("/byActive") //GET buscar por barberias activas
     public ResponseEntity<List<BarberShop>> getActiveBarberShop(){
         List<BarberShop> activeBarberShop = shopService.getActiveBarberShop();
 
